@@ -4,7 +4,7 @@ import { AuthProvider } from '@/context/AuthContext';
 import { SystemDataProvider } from '@/context/SystemDataContext';
 
 export const metadata: Metadata = {
-  title: 'EduCore - Smart Student Management System',
+  title: 'Class Optima - Smart Student & Timetable Management',
   description: 'Enterprise Student Management System with automated credentials generation, attendance tracking, leave approval workflow, and rich statistical analytics.',
 };
 
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -23,7 +23,7 @@ export default function RootLayout({
           rel="stylesheet" 
         />
       </head>
-      <body className="min-h-screen bg-[#090d16] text-slate-100 antialiased font-['Plus_Jakarta_Sans',sans-serif]">
+      <body className="min-h-screen bg-[#f4f7fb] text-slate-800 antialiased font-['Plus_Jakarta_Sans',sans-serif]">
         <AuthProvider>
           <SystemDataProvider>
             {children}

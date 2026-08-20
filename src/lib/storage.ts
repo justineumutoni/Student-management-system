@@ -31,7 +31,7 @@ const STORAGE_KEYS = {
   ATTENDANCE: 'sms_attendance_data',
   LEAVES: 'sms_leaves_data',
   NOTIFICATIONS: 'sms_notifications_data',
-  INIT_FLAG: 'sms_initialized_v1',
+  INIT_FLAG: 'sms_initialized_clean_v3',
 };
 
 export class StorageManager {
@@ -40,19 +40,20 @@ export class StorageManager {
   }
 
   /**
-   * Initializes local storage with rich starter data on first launch
+   * Initializes local storage with empty data for user's own accounts
    */
   public static initializeData(): void {
     if (!this.isClient()) return;
 
     const initialized = localStorage.getItem(STORAGE_KEYS.INIT_FLAG);
     if (!initialized) {
-      const allUsers = [...INITIAL_TEACHERS, ...INITIAL_STUDENTS, ...INITIAL_PENDING_REGISTRATIONS];
-      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(allUsers));
-      localStorage.setItem(STORAGE_KEYS.ATTENDANCE, JSON.stringify(generateSeedAttendance()));
-      localStorage.setItem(STORAGE_KEYS.LEAVES, JSON.stringify(INITIAL_LEAVE_REQUESTS));
-      localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(INITIAL_NOTIFICATIONS));
+      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify([]));
+      localStorage.setItem(STORAGE_KEYS.ATTENDANCE, JSON.stringify([]));
+      localStorage.setItem(STORAGE_KEYS.LEAVES, JSON.stringify([]));
+      localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify([]));
       localStorage.setItem(STORAGE_KEYS.INIT_FLAG, 'true');
+      // Also remove any old session user if they were a mock user
+      localStorage.removeItem('sms_current_session_user');
     }
   }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { useSystemData } from '@/context/SystemDataContext';
 import { AttendanceStatus } from '@/types';
@@ -11,6 +12,7 @@ import {
   Clock, 
   Calendar, 
   Users, 
+  UserPlus,
   Save, 
   CheckCircle2, 
   Filter, 
@@ -269,8 +271,21 @@ export default function TeacherAttendancePage() {
             <tbody className="divide-y divide-slate-800/60">
               {filteredStudents.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-5 py-8 text-center text-slate-500">
-                    No active students found in this section.
+                  <td colSpan={5} className="px-5 py-12 text-center text-slate-400 space-y-3">
+                    <div className="flex flex-col items-center justify-center space-y-2">
+                      <Users className="w-8 h-8 text-slate-500" />
+                      <p className="text-sm font-semibold text-white">No active students registered yet</p>
+                      <p className="text-xs text-slate-400 max-w-sm">
+                        You can add new students directly or approve students who submit their registration applications.
+                      </p>
+                      <Link
+                        href="/teacher/students"
+                        className="mt-2 inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition"
+                      >
+                        <UserPlus className="w-3.5 h-3.5" />
+                        <span>Go to Students Directory &rarr;</span>
+                      </Link>
+                    </div>
                   </td>
                 </tr>
               ) : (
